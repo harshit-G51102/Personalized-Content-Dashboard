@@ -41,7 +41,11 @@ const NewsFeed = () => {
                 />
               )}
               <h3 className="text-lg font-semibold mt-2">{article.title}</h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300">{article.description}</p>
+              <p
+                className="text-sm text-gray-600 dark:text-gray-300"
+                dangerouslySetInnerHTML={{ __html: article.description }}
+              ></p>
+
               <a
                 href={article.url}
                 target="_blank"
