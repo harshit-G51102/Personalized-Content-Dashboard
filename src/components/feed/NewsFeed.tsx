@@ -33,19 +33,16 @@ const NewsFeed = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {articles.map((article, index) => (
             <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              {article.urlToImage && (
-                <img
-                  src={article.urlToImage}
-                  alt={article.title}
-                  className="w-full h-40 object-cover rounded"
-                />
-              )}
+              <img
+                src={article.urlToImage || '/demo.png'}
+                alt={article.title}
+                className="w-full h-40 object-cover rounded"
+              />
               <h3 className="text-lg font-semibold mt-2">{article.title}</h3>
               <p
                 className="text-sm text-gray-600 dark:text-gray-300"
                 dangerouslySetInnerHTML={{ __html: article.description }}
               ></p>
-
               <a
                 href={article.url}
                 target="_blank"
@@ -61,6 +58,7 @@ const NewsFeed = () => {
                 ❤️ Add to Favorites
               </button>
             </div>
+
 
           ))}
         </div>

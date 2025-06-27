@@ -111,13 +111,11 @@ const FavoritesFeed = () => {
               </div>
 
               {/* Right: Image */}
-              {article.urlToImage && (
-                <img
-                  src={article.urlToImage}
-                  alt={article.title}
-                  className="w-full md:w-48 h-32 object-cover rounded"
-                />
-              )}
+              <img
+                src={article.urlToImage || '/demo.png'}
+                alt={article.title}
+                className="w-full md:w-48 h-32 object-cover rounded"
+              />
             </div>
           </Reorder.Item>
         ))}
