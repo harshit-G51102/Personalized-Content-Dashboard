@@ -55,16 +55,16 @@ const FavoritesFeed = () => {
   }, [orderedFavorites])
 
   useEffect(() => {
-  if (process.env.NODE_ENV === 'development') {
-    const stored = localStorage.getItem('redux-persist:favorites')
-    if (stored) {
-      const parsed = JSON.parse(stored)
-      if (parsed.articles) {
-        dispatch({ type: 'favorites/setFavorites', payload: parsed.articles })
+    if (process.env.NODE_ENV === 'development') {
+      const stored = localStorage.getItem('redux-persist:favorites')
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (parsed.articles) {
+          dispatch({ type: 'favorites/setFavorites', payload: parsed.articles })
+        }
       }
     }
-  }
-}, [])
+  }, [])
 
   if (!orderedFavorites.length)
     return <p className="mt-4">No favorites yet.</p>
@@ -89,9 +89,11 @@ const FavoritesFeed = () => {
               {/* Left: Text */}
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{article.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                  {article.description}
-                </p>
+                <p
+                  className="text-sm text-gray-600 dark:text-gray-300"
+                  dangerouslySetInnerHTML={{ __html: article.description }}
+                ></p>
+
                 <a
                   href={article.url}
                   target="_blank"
