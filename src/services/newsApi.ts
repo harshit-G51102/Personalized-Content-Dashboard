@@ -1,17 +1,10 @@
-import axios from 'axios'
+export const fetchNewsByCategory = async (category: string, page: number = 1) => {
+  const res = await fetch(`/api/news?category=${category}&page=${page}`);
 
-const API_KEY = process.env.NEXT_PUBLIC_NEWS_API_KEY
-const BASE_URL = 'https://newsapi.org/v2'
+  if (!res.ok) {
+    throw new Error("Failed to fetch news");
+  }
 
-export const fetchNewsByCategory = async (category: string, page = 1) => {
-  const response = await axios.get(`${BASE_URL}/top-headlines`, {
-    params: {
-      country: 'us',
-      category,
-      apiKey: API_KEY,
-      page,
-      pageSize: 5, // adjust page size
-    },
-  })
-  return response.data.articles
-}
+  const data = await res.json();
+  return data.articles;
+};
