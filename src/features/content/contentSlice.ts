@@ -6,6 +6,7 @@ type Article = {
   url: string
   urlToImage: string
   description: string
+  category: string
 }
 
 interface ContentState {

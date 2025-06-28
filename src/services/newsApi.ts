@@ -21,6 +21,7 @@ export const fetchNewsByCategory = async (category: string, page: number = 1) =>
     url: item.link,
     urlToImage: item.enclosure?.link || '', // image if available
     description: item.description,
+    category
   }));
 
   return mappedArticles;

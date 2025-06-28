@@ -6,6 +6,7 @@ import { fetchNews, incrementPage } from '@/features/content/contentSlice'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useEffect, useState } from 'react'
 import { addToFavorites } from '@/features/favorites/favoritesSlice'
+import { categoryImages } from '@/data/categoryImages'
 
 const NewsFeed = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ const NewsFeed = () => {
     dispatch(fetchNews({ categories, page: page + 1 }) as any)
   }
 
+
   return (
     <div className="mt-2">
       <h1 className='text-center mb-4 text-4xl font-bold'>Dashboard</h1>
@@ -37,10 +39,15 @@ const NewsFeed = () => {
           {articles.map((article, index) => (
             <div key={index} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
               <img
-                src={article.urlToImage || '/demo.png'}
+                src={
+                  article.urlToImage ||
+                  categoryImages[article.category as keyof typeof categoryImages] ||
+                  '/demo.png'
+                }
                 alt={article.title}
                 className="w-full h-40 object-cover rounded"
               />
+              <h1>{article.category}</h1>
               <h3 className="text-lg font-semibold mt-2">{article.title}</h3>
               <p
                 className="text-sm text-gray-600 dark:text-gray-300"
