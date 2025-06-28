@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Provider from "./provider";
 import SidebarLayout from "@/components/layout/SidebarLayout";
+import WelcomeOverlay from "@/components/ui/WelcomeOverlay";
 
 // Load fonts with CSS variable support
 const geistSans = Geist({
@@ -34,6 +35,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
+        <WelcomeOverlay></WelcomeOverlay>
         <Provider><SidebarLayout>{children}</SidebarLayout></Provider>
       </body>
     </html>

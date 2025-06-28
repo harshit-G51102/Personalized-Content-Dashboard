@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { fetchNews, incrementPage } from '@/features/content/contentSlice'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { addToFavorites } from '@/features/favorites/favoritesSlice'
 
 const NewsFeed = () => {
   const dispatch = useDispatch()
+  const [addedFavorites, setAddedFavorites] = useState<number[]>([])
+
   const { articles, loading, hasMore, page } = useSelector((state: RootState) => state.content)
   const categories = useSelector((state: RootState) => state.preferences.categories)
 
@@ -22,7 +24,8 @@ const NewsFeed = () => {
   }
 
   return (
-    <div className="mt-6">
+    <div className="mt-2">
+      <h1 className='text-center mb-4 text-4xl font-bold'>Dashboard</h1>
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMore}
@@ -52,11 +55,18 @@ const NewsFeed = () => {
                 Read More →
               </a>
               <button
-                onClick={() => dispatch(addToFavorites(article))}
-                className="mt-2 text-sm text-green-600 hover:underline"
+                onClick={() => {
+                  dispatch(addToFavorites(article))
+                  setAddedFavorites((prev) => [...prev, index])
+                  setTimeout(() => {
+                    setAddedFavorites((prev) => prev.filter((i) => i !== index))
+                  }, 2000)
+                }}
+                className="cursor-pointer mt-2 text-sm text-pink-600"
               >
-                ❤️ Add to Favorites
+                {addedFavorites.includes(index) ? '✅ Added to Favorites' : '❤️ Add to Favorites'}
               </button>
+
             </div>
 
 

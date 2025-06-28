@@ -18,7 +18,7 @@ const TVRecommendationsFeed = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Trending TV Shows</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Trending TV Shows</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {shows.map((show) => (
           <div key={show.id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">

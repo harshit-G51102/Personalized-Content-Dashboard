@@ -48,11 +48,34 @@ const FavoritesFeed = () => {
 
   // Save order to localStorage whenever changed
   useEffect(() => {
-    if (orderedFavorites.length) {
-      const urls = orderedFavorites.map((item) => item.url)
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(urls))
+    if (favorites.length) {
+      const savedOrder = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+      if (savedOrder) {
+        try {
+          const orderedUrls: string[] = JSON.parse(savedOrder)
+
+          const ordered = orderedUrls
+            .map((url) => favorites.find((item) => item.url === url))
+            .filter(Boolean) as typeof favorites
+
+          const remaining = favorites.filter(
+            (item) => !ordered.some((o) => o.url === item.url)
+          )
+
+          setOrderedFavorites([...ordered, ...remaining])
+        } catch (error) {
+          console.error('Invalid favorites order in localStorage', error)
+          setOrderedFavorites(favorites)
+        }
+      } else {
+        setOrderedFavorites(favorites)
+      }
+    } else {
+      setOrderedFavorites([])
     }
-  }, [orderedFavorites])
+  }, [favorites])
+
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
@@ -67,11 +90,10 @@ const FavoritesFeed = () => {
   }, [])
 
   if (!orderedFavorites.length)
-    return <p className="mt-4">No favorites yet.</p>
+    return <p className="mt-4 text-center">No favorites yet.</p>
 
   return (
     <div className="mt-6">
-      <h2 className="text-xl font-bold mb-4">Your Favorites</h2>
       <Reorder.Group
         axis="y"
         values={orderedFavorites}
@@ -104,7 +126,7 @@ const FavoritesFeed = () => {
                 </a>
                 <button
                   onClick={() => dispatch(removeFromFavorites(article.url))}
-                  className="block mt-2 text-red-600 text-sm hover:underline"
+                  className="cursor-pointer block mt-2 text-red-600 text-sm hover:underline"
                 >
                   ❌ Remove
                 </button>

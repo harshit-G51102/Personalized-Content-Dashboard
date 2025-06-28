@@ -18,18 +18,20 @@ const CategorySelector = () => {
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-xl font-semibold mb-4">Select Categories</h2>
-      <div className="flex flex-wrap gap-2">
+    <div className="p-2">
+      <h2 className="text-4xl font-semibold mb-4 text-center">Select Categories</h2>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {allCategories.map((cat) => (
           <button
             key={cat}
             onClick={() => toggleCategory(cat)}
-            className={`px-4 py-2 rounded-lg border ${
-              selected.includes(cat) ? 'bg-blue-900 text-white' : 'bg-blue-400'
+            className={`w-68 h-68 text-lg font-medium rounded-lg border transition-all duration-200 shadow ${
+              selected.includes(cat)
+                ? 'bg-gray-900 text-white border-2 border-white'
+                : 'bg-blue-100 text-black hover:bg-blue-200 border-1 border-white'
             }`}
           >
-            {cat}
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </button>
         ))}
       </div>
