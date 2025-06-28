@@ -65,3 +65,6 @@ src/
 ├── data/             # Mock data (e.g., social posts)
 ├── tests/            # Unit & integration test files
 
+## 🙋‍♂️ Author
+
+**Harshit Gangwar** 
