@@ -46,7 +46,7 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ```bash
    npm run dev
 
-## 📁 Folder Structure (Brief)
+## Folder Structure (Brief)
 
 ```bash
 src/
