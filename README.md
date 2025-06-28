@@ -26,7 +26,7 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -65,6 +65,30 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ├── data/             # Mock data (e.g., social posts)
    ├── tests/            # Unit & integration test files
 ```
+## Testing
+
+1. **Unit & Integration Testing**
+
+   Run With
+   ```bash
+   npm test
+
+Uses:jest,@testing-library/react,@testing-library/jest-dom
+
+Covers:Component rendering,Redux integration,Empty states and UI logic
+
+2. **Cypress End-to-End Testing**
+   
+   Run Cypress tests in interactive mode:
+   ```bash
+   npx cypress open
+Tests user flows like:
+
+Searching TV shows and viewing overlays
+
+Verifying search input behavior
+
+Testing UI elements visibility and structure
 
 ## Author
 
