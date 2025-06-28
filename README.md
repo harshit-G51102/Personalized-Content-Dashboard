@@ -65,7 +65,8 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ├── data/             # Mock data (e.g., social posts)
    ├── tests/            # Unit & integration test files
 ```
-##Author
+
+## Author
 
 **Harshit Gangwar** 
 
