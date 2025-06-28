@@ -77,7 +77,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </header>
 
-        <main className="flex-1 p-6 bg-white dark:bg-black text-black dark:text-white overflow-y-auto pl-48 pr-48">
+        <main className="flex-1 p-6 bg-white dark:bg-black text-black dark:text-white overflow-y-auto md:pl-36 md:pr-36 lg:pl-48 lg:pr-48">
           {showOverlay && searchResults.length > 0 && (
             <SearchOverlay
               results={searchResults}
