@@ -5,7 +5,7 @@ import { RootState } from '@/redux/store'
 import { removeFromFavorites } from '@/features/favorites/favoritesSlice'
 import { useState, useEffect } from 'react'
 import { Reorder } from 'framer-motion'
-
+import { categoryImages } from '@/data/categoryImages'
 const LOCAL_STORAGE_KEY = 'favorites-order'
 
 const FavoritesFeed = () => {
@@ -134,7 +134,11 @@ const FavoritesFeed = () => {
 
               {/* Right: Image */}
               <img
-                src={article.urlToImage || '/demo.png'}
+                src={
+                  article.urlToImage ||
+                  categoryImages[article.category as keyof typeof categoryImages] ||
+                  '/demo.png'
+                }
                 alt={article.title}
                 className="w-full md:w-48 h-32 object-cover rounded"
               />
