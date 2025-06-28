@@ -32,23 +32,16 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ```bash
    git clone https://github.com/your-username/personalized-dashboard.git
    cd personalized-dashboard
-Install dependencies
 
-bash
-Copy
-Edit
-npm install
-Setup environment
-Create a .env.local file:
+2. **Install dependencies**
+   ```bash
+   npm install
+3. **Setup environment**
+   Create a .env.local file:
+   ```bash
+     NEXT_PUBLIC_NEWS_API_KEY=your_newsapi_key
+4. **Run the development server**
+   ```bash
+   npm run dev
 
-env
-Copy
-Edit
-NEXT_PUBLIC_NEWS_API_KEY=your_newsapi_key
-Run the development server
-
-bash
-Copy
-Edit
-npm run dev
 
