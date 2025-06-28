@@ -26,7 +26,7 @@ const SearchBar = ({ onSearch, placeholder = 'Search...' }: Props) => {
       type="text"
       value={query}
       onChange={(e) => setQuery(e.target.value)}
-      placeholder="Search"
+      placeholder={placeholder}
       className="w-full p-2 border rounded-md dark:bg-gray-800 dark:text-white"
     />
   )
