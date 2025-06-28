@@ -37,10 +37,12 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ```bash
    npm install
 3. **Setup environment**
+   
    Create a .env.local file:
+   
    ```bash
      NEXT_PUBLIC_NEWS_API_KEY=your_newsapi_key
-4. **Run the development server**
+5. **Run the development server**
    ```bash
    npm run dev
 
