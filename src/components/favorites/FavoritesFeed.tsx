@@ -2,10 +2,11 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { removeFromFavorites } from '@/features/favorites/favoritesSlice'
+import { removeFromFavorites, setFavorites } from '@/features/favorites/favoritesSlice'
 import { useState, useEffect } from 'react'
 import { Reorder } from 'framer-motion'
 import { categoryImages } from '@/data/categoryImages'
+
 const LOCAL_STORAGE_KEY = 'favorites-order'
 
 const FavoritesFeed = () => {
@@ -28,7 +29,6 @@ const FavoritesFeed = () => {
             .map((url) => favorites.find((item) => item.url === url))
             .filter(Boolean) as typeof favorites
 
-          // Add any new items not in saved order
           const remaining = favorites.filter(
             (item) => !ordered.some((o) => o.url === item.url)
           )
@@ -46,44 +46,22 @@ const FavoritesFeed = () => {
     }
   }, [favorites, orderRestored])
 
-  // Save order to localStorage whenever changed
+  // Sync to localStorage whenever orderedFavorites change
   useEffect(() => {
-    if (favorites.length) {
-      const savedOrder = localStorage.getItem(LOCAL_STORAGE_KEY)
-
-      if (savedOrder) {
-        try {
-          const orderedUrls: string[] = JSON.parse(savedOrder)
-
-          const ordered = orderedUrls
-            .map((url) => favorites.find((item) => item.url === url))
-            .filter(Boolean) as typeof favorites
-
-          const remaining = favorites.filter(
-            (item) => !ordered.some((o) => o.url === item.url)
-          )
-
-          setOrderedFavorites([...ordered, ...remaining])
-        } catch (error) {
-          console.error('Invalid favorites order in localStorage', error)
-          setOrderedFavorites(favorites)
-        }
-      } else {
-        setOrderedFavorites(favorites)
-      }
-    } else {
-      setOrderedFavorites([])
+    if (orderedFavorites.length) {
+      const orderedUrls = orderedFavorites.map((article) => article.url)
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(orderedUrls))
     }
-  }, [favorites])
+  }, [orderedFavorites])
 
-
+  // Load Redux-persisted favorites (for dev or Cypress)
   useEffect(() => {
     if (process.env.NODE_ENV === 'development') {
       const stored = localStorage.getItem('redux-persist:favorites')
       if (stored) {
         const parsed = JSON.parse(stored)
         if (parsed.articles) {
-          dispatch({ type: 'favorites/setFavorites', payload: parsed.articles })
+          dispatch(setFavorites(parsed.articles))
         }
       }
     }
@@ -108,7 +86,6 @@ const FavoritesFeed = () => {
             className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow cursor-grab active:cursor-grabbing"
           >
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              {/* Left: Text */}
               <div className="flex-1">
                 <h3 className="text-lg font-semibold">{article.title}</h3>
                 <p
@@ -132,7 +109,6 @@ const FavoritesFeed = () => {
                 </button>
               </div>
 
-              {/* Right: Image */}
               <img
                 src={
                   article.urlToImage ||
