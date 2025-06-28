@@ -46,4 +46,22 @@ A feature-rich, customizable news and content dashboard built with **Next.js**, 
    ```bash
    npm run dev
 
+## 📁 Folder Structure (Brief)
+
+```bash
+src/
+├── components/       # All UI components
+│   ├── favorites/     # Favorite list UI and logic
+│   ├── layout/        # Layout and wrapper components
+│   ├── preference/    # Category selection and theme toggle
+│   ├── search/        # Search bar and overlay UI
+│   └── content/       # News feed and article components
+├── features/         # Redux slices
+│   ├── favorites/     # favoriteSlice.ts
+│   ├── content/       # contentSlice.ts
+│   └── preference/    # preferenceSlice.ts
+├── redux/            # Redux store setup
+├── app/              # Next.js routes (App Router structure)
+├── data/             # Mock data (e.g., social posts)
+├── tests/            # Unit & integration test files
 
