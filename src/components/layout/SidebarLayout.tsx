@@ -32,9 +32,9 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
   const navItems = [
     { href: '/', label: 'Home' },
     { href: '/favorites', label: 'Favorites' },
-    { href: '/settings', label: 'Settings' },
+    { href: '/social', label: 'Social' },
     { href: '/recommendations', label: 'Recommendations' },
-    { href: '/search', label: 'Search' },
+    { href: '/settings', label: 'Settings' },
   ]
 
   return (
